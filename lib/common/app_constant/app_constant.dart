@@ -1,3 +1,3 @@
 class AppConstant {
-  static const accessToken = 'accessToken';
+  static const token = 'token';
 }

@@ -17,7 +17,7 @@ class AppImages {
   static const checkBoxFilled = "assets/icons/checkbox filled.png";
   static const checkBoxFilledSquare = "assets/icons/Checbox filled squar.png";
   static const eyeClose = "assets/icons/eye close.png";
-  static const eyeOpen = "assets/icons/eye.png";
+  static const eye = "assets/icons/eye.png";
   static const accountInfo = "assets/icons/account info.png";
   static const activityLog = "assets/icons/activity log.png";
   static const activityLogFilled = "assets/icons/activity log filled.png";
