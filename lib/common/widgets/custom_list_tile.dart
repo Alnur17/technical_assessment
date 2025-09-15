@@ -4,75 +4,60 @@ import '../app_color/app_colors.dart';
 import '../app_text_style/styles.dart';
 
 class CustomListTile extends StatelessWidget {
-  final String leadingImage;
+  final String leadingText;
   final String title;
-  final TextStyle? titleStyle;
-  final String? rightText;
-  final String? trailingImage;
-  final bool? isSwitch;
-  final bool switchValue;
-  final Color? borderColor;
-  final Color? containerColor;
-  final ValueChanged<bool>? onSwitchChanged;
+  final String subtitle;
   final VoidCallback? onTap;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
 
   const CustomListTile({
     super.key,
-    required this.leadingImage,
+    required this.leadingText,
     required this.title,
-    this.rightText,
-    this.trailingImage,
-    this.borderColor,
-    this.containerColor = AppColors.silver,
-    this.isSwitch = false,
-    this.switchValue = false,
-    this.onSwitchChanged,
+    required this.subtitle,
     this.onTap,
+    this.backgroundColor,
+    this.borderColor,
     this.titleStyle,
+    this.subtitleStyle,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        //color: containerColor,
         borderRadius: BorderRadius.circular(12),
-        //border: Border.all(color: borderColor ?? AppColors.silver),
+        color: backgroundColor ?? AppColors.silver,
+        border: Border.all(color: borderColor ?? AppColors.borderColor),
       ),
       child: ListTile(
-        leading: Image.asset(
-          leadingImage,
-          scale: 4,
-        ),
-        title: Row(
-          children: [
-            Text(
-              title,
-              style: titleStyle ?? h5.copyWith(fontWeight: FontWeight.bold),
-            ),
-            const Spacer(),
-            if (rightText != null) Text(rightText!, style: h3),
-          ],
-        ),
-        trailing: isSwitch == true
-            ? Transform.scale(
-                scale: 0.85,
-                child: Switch(
-                  value: switchValue,
-                  onChanged: onSwitchChanged,
-                  activeColor: AppColors.blue,
-                  inactiveThumbColor: Colors.black,
-                  inactiveTrackColor: Colors.white,
-                ),
-              )
-            : trailingImage != null
-                ? Image.asset(
-                    trailingImage!,
-                    //color: AppColors.black,
-                    scale: 4,
-                  )
-                : null,
         onTap: onTap,
+        leading: Container(
+          padding: EdgeInsets.all(12),
+          decoration: const ShapeDecoration(
+            shape: CircleBorder(),
+            color: AppColors.white,
+          ),
+          child: Text(
+            leadingText,
+            style: h5,
+          ),
+        ),
+        title: Text(
+          title,
+          style: titleStyle ?? h5.copyWith(fontWeight: FontWeight.bold),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Text(
+          subtitle,
+          style: subtitleStyle ?? h6,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }

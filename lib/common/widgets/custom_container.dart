@@ -9,6 +9,7 @@ class CustomContainer extends StatelessWidget {
   final TextStyle? textStyle;
   final String imagePath;
   final Color backgroundColor;
+  final Color borderColor;
   final EdgeInsetsGeometry? padding;
   final BorderRadiusGeometry? borderRadius;
   final VoidCallback onTap;
@@ -22,7 +23,7 @@ class CustomContainer extends StatelessWidget {
     this.padding,
     this.borderRadius,
     this.height = 54,
-    required this.onTap,
+    required this.onTap,  this.borderColor = AppColors.borderColor,
   });
 
   @override
@@ -35,6 +36,7 @@ class CustomContainer extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: borderRadius ?? BorderRadius.circular(8),
           color: backgroundColor,
+          border: Border.all(color: borderColor)
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

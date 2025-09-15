@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 
 import '../../../../common/app_color/app_colors.dart';
 import '../../../../common/app_images/app_images.dart';
 import '../../../../common/app_text_style/styles.dart';
+import '../../../../common/helper/theme_controller.dart';
 import '../../../../common/size_box/custom_sizebox.dart';
 import '../../../../common/widgets/custom_button.dart';
 import '../../../../common/widgets/custom_loader.dart';
@@ -21,11 +21,13 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final LoginController loginController = Get.put(LoginController());
+  final ThemeController themeController = Get.put(ThemeController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor:
+          themeController.isDarkMode.value ? AppColors.black : AppColors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20).r,
         child: Column(
@@ -33,26 +35,38 @@ class _LoginViewState extends State<LoginView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Login to your Account',
+              'login_to_your_account'.tr,
               style: h2.copyWith(
+                color: themeController.isDarkMode.value
+                    ? AppColors.white
+                    : AppColors.black,
                 fontWeight: FontWeight.w700,
               ),
             ),
             sh12,
             Text(
-              'It is quick and easy to log in. Enter your email and password below.',
+              'login_description'.tr,
               style: h4.copyWith(color: AppColors.grey),
             ),
             sh40,
-            Text('Email', style: h4),
+            Text('email'.tr,
+                style: h4.copyWith(
+                  color: themeController.isDarkMode.value
+                      ? AppColors.white
+                      : AppColors.black,
+                )),
             sh8,
             CustomTextField(
-              hintText: 'Your email',
+              hintText: 'your_email'.tr,
               containerColor: AppColors.white,
               controller: loginController.emailTEController,
             ),
             sh12,
-            Text('Password', style: h4),
+            Text('password'.tr, style: h4.copyWith(
+              color: themeController.isDarkMode.value
+                  ? AppColors.white
+                  : AppColors.black,
+            )),
             sh8,
             Obx(() => CustomTextField(
                   sufIcon: GestureDetector(
@@ -67,7 +81,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   obscureText: !loginController.isPasswordVisible.value,
-                  hintText: '**********',
+                  hintText: 'password_placeholder'.tr,
                   containerColor: AppColors.white,
                   controller: loginController.passwordTEController,
                 )),
@@ -77,7 +91,7 @@ class _LoginViewState extends State<LoginView> {
                 return loginController.isLoading.value == true
                     ? CustomLoader(color: AppColors.white)
                     : CustomButton(
-                        text: 'Login',
+                        text: 'login_button'.tr,
                         onPressed: () {
                           loginController.userLogin();
                         },
